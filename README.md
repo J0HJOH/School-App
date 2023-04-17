@@ -7,7 +7,7 @@ of providing and offering better features that will enhance the school portal
 ## Contribution Guildlines
 
 * Fork this repository
-* Clone the repository to your repository using git clone https://github.com/J0HJOH/School-App
+* Clone the repository to your local machine using git clone https://github.com/J0HJOH/School-App
 ###  Follow this steps to begin your contribution:
  #### For the Frontend:
    - Built using Flutter
