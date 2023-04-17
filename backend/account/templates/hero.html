@@ -1,0 +1,34 @@
+{% block content %}
+{% load static %}
+
+<section class="hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 hero-right-con">
+                <div class="text-container">
+                    <h3><span class="brand-name">GoDocs</span> is an API Documentation built and managed by the backend team of FUNAI
+                    Developers
+                    </h3>
+                </div>
+                <div class="p-container">
+                    <p>This API Documentation seeks to provide descriptive information and analysis on how to integrate
+                        the API with a frontend service for the building of FUNAI Mobile app. Want to use this API?
+                        Look no further and sign-up for an account with us. 
+
+                    </p>
+                    <div class="btn-con">
+                        <span> <button class="btn btn-outline-primary"><a href="{% url 'account:signup' %}">Sign Up</a></button> </span>
+                        <span> <button class="btn btn-outline-danger "> <a href="{% url 'account:signin' %}">Sign In</a></button> </span>                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 hero-left-con">
+                <img src="{% static 'img/hero.jpg' %}" alt="an image" class="hero-img">
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock content %}

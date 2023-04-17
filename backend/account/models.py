@@ -5,7 +5,8 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 # Create your models here.
 class UserManager(BaseUserManager):
 
-    def create_user(self, name, email, department, password , **other_fields):
+    def create_user(self, name, email, department, password = None , **other_fields):
+        other_fields.setdefault('is_active', True)
         
         if not name:
             raise ValueError('Name can not be blank')
@@ -17,13 +18,14 @@ class UserManager(BaseUserManager):
         email = self.normalize_email(email)
         user = self.model(name=name, email=email, department=department, password=password, **other_fields)
         user.set_password(password)
-        user.save()
+        user.save(using=self._db)
         
         return user
 
-    def create_staffuser(self, name, email, department, password, **other_fields):
+    def create_staffuser(self, name, email, department, password=None, **other_fields):
         other_fields.setdefault('is_active', True)
         other_fields.setdefault('is_staff', True)
+
 
         if not other_fields.get('is_active'):
             raise ValueError('Staff users must have an active account')
@@ -34,10 +36,10 @@ class UserManager(BaseUserManager):
             password=password,
             **other_fields
         )
-        user.save()
+        user.save(using=self._db)
         return user
 
-    def create_superuser(self, name, email, department, password, **other_fields):
+    def create_superuser(self, name, email, department, password = None, **other_fields):
         other_fields.setdefault('is_active', True)
         other_fields.setdefault('is_staff', True)
         other_fields.setdefault('is_superuser', True)
@@ -54,7 +56,7 @@ class UserManager(BaseUserManager):
             password = password,
             **other_fields
         )
-        user.save()
+        user.save(using=self._db)
         return user
 
 
@@ -68,11 +70,20 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
-    REQUIRED_FIELDS = ['email', 'department']
-    USERNAME_FIELD = 'name'
+    REQUIRED_FIELDS = ['name', 'department']
+    USERNAME_FIELD = 'email'
 
     objects = UserManager()
 
 
     def __str__(self):
         return self.name
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
+
+
+    

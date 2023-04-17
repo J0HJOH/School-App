@@ -1,0 +1,81 @@
+.img-login-con{
+    margin-top: 0rem;
+
+}
+
+.login-img{
+    height: 40rem !important;
+    width: 35rem !important;
+    object-fit: contain;
+}
+
+.login-form{
+    margin-top: 14rem;
+    margin-left: 140px;
+
+}
+
+@media only screen and (max-width: 640px) {
+    .login-form{
+        margin-top: 1rem;
+        margin-left: 40px;
+    }
+    
+}
+
+.login-input-con{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    box-shadow: 0 0 20px -20px;
+    position: relative; 
+
+}
+
+input{
+    width: 90% !important;
+    height: 20% !important;
+    margin: 15px 0px;
+}
+
+.login-btn{
+    width: 80px;
+    height: 30px;
+    align-self: center;
+    border-radius: 30px;
+    background-color: white;
+    transition: 2s ease;
+    border: 1px solid blue;
+    color: black;
+}
+
+.checkbox{
+    width: 2px;
+    height: 1px;
+    align-self: flex-start !important;
+    margin-right: 70% !important;
+    cursor: pointer;
+}
+
+.checkbox-con{
+    display: flex;
+    align-items: flex-start !important;
+    padding: 5px;
+    justify-content: flex-start !important;
+}
+
+.login-btn:hover{
+    color: lightblue;
+}
+
+.login-hide-password{
+    position: absolute;
+    left: 85%;
+    top: 52%;
+    cursor: pointer;
+    transition: 2s ease;
+}
+
+.login-hide-password:hover{
+    color: lightblue;
+}

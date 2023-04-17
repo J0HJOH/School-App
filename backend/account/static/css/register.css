@@ -1,0 +1,103 @@
+.register-section{
+    background-image: url(/static/css/bg_Img/bg_Intro.jpg) !important;
+    /* background-color: blue; */
+    width: 100%;
+    height: 100%;
+    /* color: pink; */
+    /* font-family: 'Poppins', sans-serif; */
+    font-size: large;
+    font-weight: 450;
+    
+}
+
+.register-con{
+    margin-top: 5rem;
+    padding: 10px 30px;
+}
+
+.text-container{
+    margin-top: 50px;
+}
+
+.form-con{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: black;
+    margin-left: 70px !important;
+}
+
+@media only screen and (max-width: 650px) {
+    .form-con{
+        margin-left: 0px !important;
+        
+    }
+    
+}
+
+.input-con{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
+    padding: 10px;
+    position: relative;
+    height: 100%;
+    justify-content: center;
+}
+
+input{
+    width: 100%;
+}
+
+.form-register{
+    background-color: white;
+    width: 400px;
+    height: 100%;
+    box-shadow: 0 0 20px -20px; 
+
+}
+
+.eye-slash-password{
+    position: absolute;
+    top: 70%;
+    left: 85%;
+    cursor: pointer;
+    transition: 2s ease;
+    
+
+}
+
+.eye-open-password{
+    position: absolute;
+    top: 90%;
+    left: 85%;
+    cursor: pointer;
+    transition: 2s ease;
+}
+
+.test-none{
+    display: none;
+}
+
+.eye-slash-password:hover{
+    color: lightblue;
+}
+
+.eye-open-password:hover{
+    color: lightblue;
+}
+
+.sign-up{
+    margin-left: 40%;
+    border-radius: 40px;
+    
+}
+
+/* .user-password{
+    position: relative;
+
+}
+
+.confirm-password{
+    position: relative;
+} */
