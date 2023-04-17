@@ -12,14 +12,14 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ['name', 'email', 'department']
     ordering = ['created']
     list_display = ['name']
-    list_filter = ['is_superuser']
+    list_filter = ['is_staff', 'is_superuser']
 
     form = AdminChangeForm
 
     fieldsets = (
         (None, {'fields': (['email'])}),
         ('Personal info', {'fields': ('name', 'department', 'password')}),
-        ('Permissions', {'fields': ('is_superuser', 'is_active')}),
+        ('Permissions', {'fields': ('is_superuser', 'is_staff', 'is_active')}),
     )
 
     add_fieldsets = (

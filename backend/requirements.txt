@@ -2,9 +2,3 @@ django >= 3.2.0
 djangorestframework
 django-dotenv
 django-cors-headers == 3.14.0
-djangorestframework-api-key
-requests
-psycopg2-binary
-dj-database-url == 1.2.0 
-gunicorn
-argon2-cffi

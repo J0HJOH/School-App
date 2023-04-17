@@ -1,0 +1,32 @@
+body{
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    height: 100%;
+    background-color: black !important;
+}
+
+.hero{
+    padding: 10px;
+    margin-top: 40px;
+    /* color: white !important; */
+}
+.brand-name{
+    color: skyblue;
+    font-family: 'Ubuntu', sans-serif;
+}
+.hero-right-con{
+    padding-top: 80px;    
+}
+.hero-img{
+    height: 30rem;
+    width: 20rem;
+    margin-left: 160px;
+}
+
+.register-section{
+    background-image: url(" {% static '/static/css/bg_Img/bg_Intro.jpg' %} ") !important;
+    width: 100%;
+    height: 100%;
+    background-color: green !important;
+    
+}
