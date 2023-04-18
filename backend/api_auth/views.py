@@ -21,17 +21,24 @@ User = get_user_model()
 class UserCreateView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializers
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, UserPerm, HasAPIKey]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly |UserPerm | HasAPIKey]
     authentication_classes = [authentication.SessionAuthentication, TokenAuthentication]
 
-    def perform_create(self, serializer):
-        return super().perform_create(serializer)
+    # def perform_create(self, serializer):
+    #     # password = serializer.validated_data.get('password')
+    #     # confirm_password = serializer.validated_data.get('confirm_password')
+    #     # if confirm_password == password:
+    #     #     password = confirm_password
+
+    #     #     serializer.save(password=password)
+
+    #     return super().perform_create(serializer)
 
 # list all the users 
 class UserListView(ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializers
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, UserPerm, HasAPIKey]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly | UserPerm | HasAPIKey]
     authentication_classes = [authentication.SessionAuthentication, TokenAuthentication]
 
 # Update user detalis
@@ -39,7 +46,7 @@ class UserUpdateView(UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializers
     lookup_field = 'id'
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, UserPerm, HasAPIKey]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly | UserPerm | HasAPIKey]
     authentication_classes = [authentication.SessionAuthentication, TokenAuthentication]
 
     def perform_update(self, serializer):
@@ -50,13 +57,16 @@ class UserDestoryView(DestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializers
     lookup_field = 'id'
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, UserPerm, HasAPIKey]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly | UserPerm | HasAPIKey]
     authentication_classes = [authentication.SessionAuthentication, TokenAuthentication]
+
+    def perform_destroy(self, instance):
+        return super().perform_destroy(instance)
 
 # obtain a single user
 class UserRetriveView(RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializers
     lookup_field = 'id'
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, UserPerm, HasAPIKey]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly | UserPerm | HasAPIKey]
     authentication_classes = [authentication.SessionAuthentication, TokenAuthentication]
