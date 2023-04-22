@@ -28,7 +28,8 @@
     flex-direction: column;
     justify-content: space-evenly;
     box-shadow: 0 0 20px -20px;
-    position: relative; 
+    position: relative;
+    
 
 }
 
@@ -36,6 +37,12 @@ input{
     width: 90% !important;
     height: 20% !important;
     margin: 15px 0px;
+}
+
+.forgot-password{
+    font-size: small;
+    margin-right: 10% !important;
+
 }
 
 .login-btn{
@@ -53,7 +60,7 @@ input{
     width: 2px;
     height: 1px;
     align-self: flex-start !important;
-    margin-right: 70% !important;
+    margin-right: 60% !important;
     cursor: pointer;
 }
 

@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 from django.contrib import messages
-
+from datetime import timedelta
 User = get_user_model()
 
 # Create your views here.
@@ -41,7 +41,7 @@ def loginView(request, *args, **kwargs):
         remeber_me = request.POST.get("checkbox")
         print(remeber_me)
         if remeber_me == "on":
-            request.session.set_expiry(0)
+            request.session.set_expiry(timedelta(days=90))
 
         # messages.success(request, f'You have successfully login as {request.user.username}')
         return redirect('account:home')
