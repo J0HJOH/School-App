@@ -1,10 +1,84 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block mycss %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hint.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
 
 {% block content %}
-    <nav>
-        <div>
+    {% if request.user.is_authenticated %}
+
+        <div class="sidebar">
             
+            <div class="top">
+                <div class="logo">
+                    <i class="fa-sharp fa-solid fa-file"></i>
+                    GoDocs
+                </div>
+                <i class="bx bx-menu" id="btn"></i>
+            </div>
+            
+            <div class="user">
+                <img src="{{request.user.profile.profile_image.url}}" alt="user's profile" class="user-img">
+                <div class="user-title">
+                    
+                        <p class="bold">{{request.user.name}}</p>
+                        {% comment %}
+                            {% if request.user.is_superuser %}
+                                <p>Admin</p>
+                            {% elif request.user.is_staff %}
+                                <p>Staff</p>
+                            {% else %}
+                                <p>User</p>
+                            {% endif %}
+                        {% endcomment %}
+                    
+                </div>
+            </div>
+            <ul>
+                <li>
+                    <a href="" class="hint--right" aria-label="Home">
+                        <i class="fa-solid fa-house-chimney"></i>
+                        <span class="nav-item">Home</span>
+                    </a>
+                    
+                    
+                </li>
+                <li>
+                    <a href="" class="hint--right" aria-label="Integrations">
+                        <i class="fa-sharp fa-solid fa-file-code"></i>
+                        <span class="nav-item">Integrations</span>
+                    </a>    
+                </li>
+                <li>
+                    <a href="" class="hint--right" aria-label="Documentation">
+                        <i class="fa-sharp fa-solid fa-bookmark"></i>
+                        <span class="nav-item">Documentation</span>
+                    </a>    
+                </li>
+                <li>
+                    <a href="" class="hint--right" aria-label="Settings">
+                        <i class="bx bx-cog"></i>
+                        <span class="nav-item">Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="hint--right" aria-label="Logout">
+                        <i class="bx bx-log-out"></i>
+                        <span class="nav-item">Logout</span>
+                    </a>
+    
+                </li>
+            </ul>
+
         </div>
-    </nav>
+    {% endif %}
+    
+
+    <script src="{% static 'js/dashboard.js' %}"></script>
 
 {% endblock %}

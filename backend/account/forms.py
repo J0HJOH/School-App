@@ -35,7 +35,7 @@ class UserRegister(UserCreationForm):
             validate_password(password)
             return password
         except Exception as e:
-            raise forms.ValidationError(f'{e}')
+            raise forms.ValidationError(f'{e.messages}')
         
 
     def clean_password2(self):

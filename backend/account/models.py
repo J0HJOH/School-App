@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-
+from django.conf import settings
+from django.db.models.signals import post_save, pre_save
+import pathlib
+MEDIA_ROOT = settings.MEDIA_ROOT
 
 # Create your models here.
 class UserManager(BaseUserManager):
@@ -87,3 +90,36 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
     
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name = 'profile', on_delete=models.CASCADE)
+    username = models.CharField(max_length=200, null=True, blank=True)
+    email = models.EmailField(max_length=200, null=True, blank=True)
+    # url = models.URLField(null=True, blank=True)
+    profile_image = models.ImageField(null=True, blank=True, default=f'{MEDIA_ROOT}/user_photo.png')
+    date_created = models.DateTimeField(auto_now_add=True)
+
+def create_user_profile(sender, instance, created, *args, **kwargs):
+    if created:
+        Profile.objects.create(user = instance, username = instance.name, email = instance.email)
+
+def save_user_profile(sender, instance, created, *args, **kwargs):
+    instance.profile.save
+
+def update_user_profile(sender, instance, created, *args, **kwargs):
+    if created:
+        instance.username = instance.user.name
+        instance.email = instance.user.email
+        instance.save()
+
+def pre_save_profile(sender, instance, *args, **kwargs):
+    if not instance.username:
+        instance.username = instance.user.name
+    if not instance.email:
+        instance.email = instance.user.email
+
+
+pre_save.connect(pre_save_profile, sender=Profile)
+post_save.connect(update_user_profile, sender=Profile)   
+
+post_save.connect(create_user_profile, sender=User)
+post_save.connect(save_user_profile, sender=User)

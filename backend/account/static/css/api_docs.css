@@ -1,0 +1,88 @@
+.topics{
+    box-shadow: 0 0 20px -20px;
+    margin-top: 2rem;
+    color: white;
+    height: 30rem;
+    box-sizing: border-box;
+    overflow-y: scroll;
+}
+
+@media only screen and (max-width: 1200px){
+    .topics{
+        height: 12rem;
+        width: 100vw !important;
+    }
+    .godocs-title{
+        margin-left: 0 !important;
+    }
+    .topics-listed{
+        width: 80vw !important;
+    }
+    
+}
+ul li{
+    list-style: none;
+}
+
+
+.topics-listed{
+    width: 20% !important;
+    margin-left: 0.1rem !important;
+}
+
+.topics a{
+    color: red;
+}
+.text-con{
+    margin-top: 2rem !important;
+    padding-left: 3rem !important;
+    width: 60rem !important;
+    
+}
+.topics i{
+    color: skyblue !important;
+    position: absolute;
+    top: 5%;
+    left: 80%;
+    cursor: pointer;
+}
+.title-heading{
+   position: relative;
+}
+.list{
+    display: none;
+}
+.godocs-title{
+    display: flex;
+    flex-direction: column;
+    align-items: center !important;
+    justify-content: center !important;
+    /* margin-left: 120%; */
+
+}
+.godocs-title p{
+    font-size: x-large;
+}
+.godocs-title p i{
+    color: skyblue;
+}
+.topics-row{
+    padding-left: 1rem !important;
+    /* width: 100%; */
+}
+.text-section{
+    /* width: 100% !important; */
+}
+.con-text-section p{
+    /* line-height: 1.5rem; */
+    /* width: 100% !important; */
+    padding-left: 5px;
+}
+
+.text-con ul li{
+    list-style-type: circle !important;
+}
+
+.python-way{
+    background-color: black !;
+}

@@ -20,7 +20,7 @@ def validate_email(value):
 
 def validate_password(value):
     if len(value) < 8:
-        raise serializers.ValidationError('Password must be 8 digits long')
+        raise serializers.ValidationError('This password is too short. It must contain at least 8 characters.', 'This password is too common')
     return value
     
 def validate_email_update(value):

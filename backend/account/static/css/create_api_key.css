@@ -1,0 +1,33 @@
+table{
+    margin-top: 3rem !important;
+}
+.authorized-request{
+    line-height: 2rem;
+    width: 100%;
+    background-color: black;
+    color: white;
+    align-self: center;
+    padding: 0.5% 10%;
+   
+    
+}
+.request{
+    position: relative;
+}
+
+.copy{
+    color: white !important;
+    position: absolute;
+    top: 0.8rem;
+    left: 90%;
+    cursor: pointer;
+    transition: 2s all ease;
+}
+.copy:hover{
+    color: pink !important;
+}
+.con-text-section p{
+    width: 100%;
+}
+
+

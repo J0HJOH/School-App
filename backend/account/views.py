@@ -14,6 +14,7 @@ def home(request):
 
 def Register(request, *args, **kwargs):
     form = UserRegister(request.POST or None)
+    # print(request.META['HTTP_HOST'])
     if form.is_valid():
         name = form.cleaned_data.get("name")
         email = form.cleaned_data.get("email")
@@ -25,6 +26,7 @@ def Register(request, *args, **kwargs):
         user.save()
         messages.success(request, "You successfully created an account with us")
         form = UserRegister()
+        
 
     context = {
         'form': form
@@ -55,3 +57,14 @@ def loginView(request, *args, **kwargs):
 
 
 
+def apiDocs(request, *args, **kwargs):
+    context = {
+        'message': "name: name: users name <br> request_message: request.META.HTTP_HOST"
+        #     'name: name: user's name
+        # 'request_message': request.META.HTTP_HOST
+        # 'email': "email: user's email",
+        # 'department': "department: user's department",
+        # 'password': "password: user's password
+        # "
+    }
+    return render(request, 'api_docs.html', context)

@@ -1,16 +1,214 @@
 {% extends 'base.html' %}
-
+{% load static %}
+{% load markdown_extras %}
+{% block mycss %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/api_docs.css' %}">
+    <link rel="stylesheet" href="{% static 'css/create_api_key.css' %}">
+    
+{% endblock %}
 {% block content %}
-    <nav>
-        <div class="nav-intro">
-            <i class="fa-sharp fa-solid fa-file"></i>
-            GoDocs
-            <a href="">Lastest</a>
-        </div>
-        <div>
-            
-        </div>
+    {% include 'navbar.html' %}
+    <div class="">
+        <div class="row topics-row">
+            {% include 'docsNavbar.html' %}
+            <div class="col-lg-6 text-con">
+                <section class="text-section" id="introduction">
+                    <div class="godocs-title">
+                        <p><i class="fa-sharp fa-solid fa-file"></i> <span class="brand-name">GoDocs</span> API Documentation</p>
+                    </div>
+                    <div class="con-text-section">
+                        <h4>Introduction</h4>
+                        <p>
+                            GoDocs is an efficient API tool that provides a user friendly way of building school apps.
+                            it is powerful and highly flexible and at the same time ensuring its credibilty in securing users.
+                        </p>
+                        <h6>Reasons why you may want to use GoDocs</h6>
+                        <ul>
+                            <li>Extensive documentation and great community support.</li>
+                            <li>Easy to use and customizable all the way down.</li>
+                            <li>Authentication policies are great, providing ways of generating API keys and tokens securely and also in a programatic way.</li>
 
-    </nav>
+                        </ul>
+                        <hr>
+                        <section id="getting-started">
+                            <div class="con-text-section">
+                                <h4>Get Started</h4>
+                                <p>
+                                    On <a href="">Signing Up</a> for an account on GoDocs you will be redirected to your dashboard where
+                                    you will be able to generate an API key or a token. Ensure you keep your tokens and keys save for future refrence and for security purposes.
+                                    Follow the required instructions on how to generate a key savely.
+
+                                
+                                </p>
+                            </div>
+                        </section>
+                        <hr>
+                        <section id="create-account">
+                            <div class="con-text-section">
+                                <h4>How to create users using the API Endpoint</h4>
+                                Make a Post request using the endpoint:
+                                <div class="request">
+                                    <p class="authorized-request create-endpoint">
+                                        {{request.META.HTTP_HOST}}{% url 'api:create' %}
+                                    </p>
+                                    <i class="fa-sharp fa-solid fa-clipboard copy copy-2"></i>        
+                                </div>
+                                Ensure you read the <a href="{% url 'api:create-keys' %}">On how to make an Authorized request</a> with
+                                your API keys before procceding with your post request. 
+
+                                <p>The underlisted parameters are needed when creating a user:</p>
+                                <ul>
+                                    <li>The User's Name</li>
+                                    <li>The User's Email Address</li>
+                                    <li>The 'User's Department</li>
+                                    <li>The 'User's Password</li>
+                                </ul>
+                                <p>
+                                    The User's Name and Password is made to be unique accross the board. That means that, not more than one account can be created with the same name or email.
+                                    This is to ensure that, no user can have more one account.
+                                    If for instance a user input the same name or email or both name and email that has been created and saved before in 
+                                    the database, a status code of 400 is retured showing a bad request and returing
+                                    a response showing the following:
+
+                                    <div class="request">
+                                        <p class="authorized-request bad-data">
+                                            {{
+                                                "name":
+                                                [
+                                                    "Name must be unique"
+                                                ],
+                                                <br>
+                                                "email": 
+                                                [
+                                                    "An account has already been created with this email"
+                                                ] 
+                                            }}
+                                        </p>
+                                        <i class="fa-sharp fa-solid fa-clipboard copy copy-1"></i>        
+                                    </div>
+                                    <p>
+                                        More importantly, GoDocs added a layer of security to the user's Password
+                                        ensuring that the User inputed a strong password. Therefore, if a request
+                                        is been made with a poor password, a status code of 400 will be shown.
+                                        This implies that, a poor request has been made and in return it shows 
+                                        an error message.
+
+                                        
+                                    </p>
+
+                                </p>
+                                <h5>For Example: In a pythonic way, making a POST request will be something similar to this</h5>
+                                <div class="request">
+                                    <div class="authorized-request python-way">
+                                            # pip install request 
+                                            <br>
+                                            import getpass 
+                                            <br>
+                                            import requests
+                                            <br>
+                                            endpoint = {{request.META.HTTP_HOST}}{% url 'api:create' %}
+                                            <br>
+                                            name = "users name" 
+                                            <br>
+                                            email = "user's email"
+                                            <br>
+                                            department = "users department"
+                                            <br>
+                                            user's password = getpass() # allows you to securely input your password in your terminal with out leaving any trace of it 
+                                            <br>
+                                            json = {'name': name, 'email': email, 'department': departement, 'password': password} 
+                                            <br>
+                                            headers = {'Authorization': 'Api_Key &lt;Your_Api-Key&gt;'} # where &lt;Your_Api-Key&gt; is your actual API key
+                                            <br>
+                                            get_response = request.post(endpoint, headers, body = json)
+                                            <br>
+                                            print(get_response.status_code) # To check the status code
+
+
+                                                           
+                                    </div>
+                                    <i class="fa-sharp fa-solid fa-clipboard copy copy-3"></i>        
+                                </div>
+                            </div>
+                        </section>
+                        <hr>
+                        <section id="list-users">
+                            <div class="con-text-section">
+                                <h3>How to get list of all the users</h3>
+                                <p>
+                                    In a similar way to how we <a href="#create-account">created users</a> using the api endpoint, we can also
+                                    get a list of all registered users. But this time, we are going to Make
+                                    a get request to the endpoint below:
+                                 </p>
+                                 <div class="request">
+                                    <p class="authorized-request list-endpoint">
+                                        {{request.META.HTTP_HOST}}{% url 'api:list' %}
+                                    </p>
+                                    <i class="fa-sharp fa-solid fa-clipboard copy copy-4"></i>        
+                                </div>
+                            </div>
+                        </section>
+                        <hr>
+                        <section id="update-users">
+                            <div class="con-text-section">
+                                <h3>To Update Users Credentials </h3>
+                                <p>
+                                    Similar to how we <a href="#create-account">created users</a>
+                                    you can also update a user credentials, simply by making a 'PUT' request to
+                                    the endpoint:    
+                                </p>
+                                <div class="request">
+                                    <p class="authorized-request update-endpoint">
+                                        {{request.META.HTTP_HOST}}{% url 'api:update' id=request.user.id %}
+                                    </p>
+                                    <i class="fa-sharp fa-solid fa-clipboard copy copy-5"></i>        
+                                </div>
+                                Ensure you replace '{{request.user.id}}' with the user's id and add the field and also the 
+                                value of the field that you want to update to the body similar to how 
+                                it was done when we <a href="#create-account">created users</a> but this time 
+                                selectively pick the field that you want to update. For instance; if 
+                                you only want to update the name of the user, only add name as the 
+                                key to the body and let the name of the user be the value. In a similar way, you can update several 
+                                fieldset at the same time by inputing all the fieldset of the user that you want to update and the value 
+                                to the body. 
+                                <br>
+                                <p>
+                                   <strong>Note:</strong> More importantly, the password fieldset can not be updated using this route. 
+                                    It can only be updated if the user request for a password reset incases were the user forgets their password. A verfication email and 
+                                    a link will be sent to the user via email were the user will be able to change his/her password.
+                                    <a href="">Read on the various ways you can choose for your users to reset their password.</a> 
+
+                                </p>
+
+
+                            </div>
+                        </section>
+                        <hr>
+                        <section>
+                            <div class="con-text-section">
+                                <h3>To Retrive A Particular User</h3>
+                                <p>
+                                    Similar to how we performed a 'GET' request to get theb list of all users
+                                    you can also get a user's identity by making a get request to the endpoint below: 
+
+                                </p>
+                                <div class="request">
+                                    <p class="authorized-request retrive-endpoint">
+                                        {{request.META.HTTP_HOST}}{% url 'api:retrive' id=request.user.id %}
+                                    </p>
+                                    <i class="fa-sharp fa-solid fa-clipboard copy copy-6"></i>        
+                                </div>
+                            </div>
+                            <p>Replace '{{request.user.id}}' with the user's id</p>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/docs.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
 {% endblock content %}

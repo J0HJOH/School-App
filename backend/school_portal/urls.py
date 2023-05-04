@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from django.conf import settings
 from django.contrib.auth import views as auth_views
+from django.conf.urls.static import static
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -42,7 +45,14 @@ urlpatterns = [
         'password-reset-complete/',
         auth_views.PasswordResetConfirmView.as_view(),
         name='password_reset_complete'
-    )
+    ),
+    path('api/password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
+
 
 ]
 
+# urlpatterns += urlpatterns = [
+#     ...
+#     path('api/password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
+# ]
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

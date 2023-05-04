@@ -15,10 +15,11 @@ from rest_framework import permissions, authentication
 from .permissions import UserPerm
 from .authentication import TokenAuthentication
 from rest_framework_api_key.permissions import HasAPIKey
-
+from django.contrib import messages
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-
+from .forms import APIkeyForm
+from rest_framework_api_key.models import APIKey
 # Create your views here.
 
 
@@ -63,6 +64,19 @@ class UserListView(ListAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly | UserPerm | HasAPIKey]
     authentication_classes = [authentication.SessionAuthentication, TokenAuthentication]
 
+    # def get_authenticate_header(self, request):
+    #     # return super().get_authenticate_header(request)
+    #     print(super().get_authenticate_header(request))
+    #     print(request.headers)
+
+    # def test(self):
+    #     print(self.request.headers)
+
+    # # def get(self, request, *args, **kwargs):
+    # #     # return super().get(request, *args, **kwargs)
+    # #     print(request.headers)
+    
+
 # Update user detalis
 class UserUpdateView(UpdateAPIView):
     queryset = User.objects.all()
@@ -73,19 +87,11 @@ class UserUpdateView(UpdateAPIView):
 
     def perform_update(self, serializer):
         instance = serializer.save()
+        print(self.request.headers)
 
         password = instance.password
-      
-        updated_password = serializer.validated_data.get('password')
-       
-        if not updated_password:
-            updated_password = password
-            instance.set_password(updated_password)
-            instance.save()
-        if updated_password:
-            instance.set_password(updated_password)
-            instance.save()
-        
+        instance.set_password(password)
+        instance.save()        
         
 # delete users
 class UserDestoryView(DestroyAPIView):
@@ -120,3 +126,21 @@ def createView(request, *args, **kwargs):
             serializer.save()
             return Response(serializer.data, status_code = 200)
         return Response(serializer)
+    
+
+def create_api_keyViews(request, *args, **kwargs):
+    api_key = ''
+    api_name = ''
+    user = request.user.name
+    user_api_keys = APIKey.objects.filter(name__icontains = user)
+    if request.POST:
+        name = request.POST.get('api_key_name')
+        if name:
+            api_name, api_key = APIKey.objects.create_key(name = name)
+
+            messages.success(request, f'The API key for {name}: {api_key}. Please store it somewhere safe: you will not be able to see it again.')
+            messages.success(request, f'The API key “{name}” was added successfully.')
+    context = {
+        'user_api_keys': user_api_keys
+    }
+    return render(request, 'user/create_api_key.html', context)

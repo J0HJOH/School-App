@@ -17,7 +17,7 @@ User = get_user_model()
 class UserSerializers(serializers.ModelSerializer):
     email = serializers.EmailField(validators = [validate_email])
     name = serializers.CharField(validators = [validate_name])
-    password = serializers.CharField(validators = [validate_password])
+    password = serializers.CharField(validators = [validate_password], write_only = True)
     # confirm_password = serializers.CharField(write_only = True)
     class Meta:
         model = User
@@ -41,8 +41,8 @@ class UserSerializers(serializers.ModelSerializer):
 class UserUpdateSerializers(serializers.ModelSerializer):
     email = serializers.EmailField(validators = [validate_email_update], required = False)
     name = serializers.CharField(validators = [validate_name_update], required = False)
-    password = serializers.CharField(validators = [validate_password], required = False)
     department = serializers.CharField(required = False)
+    password = serializers.CharField(read_only = True)
     # confirm_password = serializers.CharField(write_only = True)
     class Meta:
         model = User

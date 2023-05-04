@@ -9,3 +9,6 @@ dj-database-url == 1.2.0
 gunicorn
 argon2-cffi
 djangorestframework-simplejwt
+Pillow
+Markdown == 3.2.1
+django-rest-passwordreset

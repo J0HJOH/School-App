@@ -1,0 +1,108 @@
+.user-img{
+    width: 58px;
+    border-radius: 100%;
+    border: 1px solid #eee;
+    opacity: 10;
+    margin: 1rem 0rem;
+}
+
+.sidebar.active .user-img{
+    margin: 1rem 0.4rem;
+}
+
+.sidebar{
+    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 80px;
+    background-color: #12171e;
+    color: white;
+    padding: .4rem .8rem;
+    transition: all 0.5s ease;
+}
+
+.sidebar.active{
+    width: 250px !important;
+}
+
+.sidebar #btn{
+    position: absolute;
+    color: white;
+    top: .4rem;
+    left: 50%;
+    font-size: 1.2rem;
+    line-height: 50px;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+
+.sidebar .top .logo{
+    color: #fff;
+    display: flex;
+    height: 50px;
+    width: 100%;
+    align-items: center;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.sidebar.active #btn{
+    left: 90%;
+}
+
+.sidebar.active .top .logo{
+    opacity: 10;
+    
+}
+
+.user{
+    display: flex;
+    padding: 0 2px;
+}
+.user-title{
+    display: none;
+    
+}
+
+.sidebar.active .user-title{
+    display: flex;
+
+}
+.bold{
+    font-weight: 500;
+    margin-top: 2rem;
+}
+
+/* ul{
+    display: flex;
+    flex-direction: column;
+    align-items: center !important;
+} */
+ul li{
+    display: flex; 
+    list-style: none;
+    height: 50px;
+    width: 90%;
+    margin: 0.8rem auto;
+    
+
+}
+i{
+    color: #fff;
+}
+.nav-item{
+    opacity: 0;
+    color: white;
+}
+
+.sidebar.active .nav-item{
+    opacity: 1;
+
+}
+
+.con{
+    margin-left: 90px;
+
+}
