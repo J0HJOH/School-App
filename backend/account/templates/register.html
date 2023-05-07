@@ -9,6 +9,17 @@
                 <link rel="stylesheet" href="{% static 'css/register.css' %}">
                 
             {% endblock %}
+            <div class="container">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            You have successfully created an account with us
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                
+                <div>
             
             <div class="container register-con">
                 <div class="row">

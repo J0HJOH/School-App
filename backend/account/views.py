@@ -24,8 +24,8 @@ def Register(request, *args, **kwargs):
         user = User.objects.create(name = name, email = email, department = department, password = password1)
         user.set_password(password1)
         user.save()
-        messages.success(request, "You successfully created an account with us")
-        form = UserRegister()
+        return redirect('account:signin')
+        
         
 
     context = {
@@ -46,7 +46,7 @@ def loginView(request, *args, **kwargs):
             request.session.set_expiry(timedelta(days=90))
 
         # messages.success(request, f'You have successfully login as {request.user.username}')
-        return redirect('account:home')
+        return redirect('account:dashboard')
     else:
         form = UserLoginForm(request)
     context = {

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% include 'user/dashboard.html' %}
+
+<div class="con">
+    <div class="container">
+        <h3>Hello {{request.user.name}} &#128075</h3>
+        
+
+    </div>
+    <hr>
+
+</div>
+{% endblock %}

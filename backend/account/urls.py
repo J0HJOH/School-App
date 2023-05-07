@@ -9,7 +9,7 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name = 'index.html'), name="home"),
     path('register/', Register, name='signup'),
     path("login", loginView, name = "signin"),
-    path('user/dashboard', TemplateView.as_view(template_name = 'user/dashboard.html')),
+    path('user/dashboard', TemplateView.as_view(template_name = 'user/userdashboard.html'), name = 'dashboard'),
     path('docs', apiDocs),
     
 
