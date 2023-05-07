@@ -28,7 +28,7 @@ DEBUG = str(os.environ.get('DEBUG')) == '1'
 
 
 
-ALLOWED_HOSTS = ['http://*', 'https://*', 'https://godocs.up.railway.app/']
+ALLOWED_HOSTS = ['https://godocs.up.railway.app']
 if not DEBUG:
     ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS')]
 
@@ -285,4 +285,4 @@ if POSTGRES_READY:
         }
     }
 
-CSRF_TRUSTED_ORIGINS = ['https://godocs.up.railway.app/', 'https://godocs']
+CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS.copy()
