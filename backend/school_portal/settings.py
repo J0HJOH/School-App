@@ -248,7 +248,7 @@ if str(os.environ.get('AWS_READY')) == '1' and not DEBUG:
     
     STATIC_URL= f'{AWS_S3_ENDPOINT_URL}/static/'
     MEDIA_URL = f'{AWS_S3_ENDPOINT_URL}/media/'
-    MEDIA_ROOT = f'{AWS_S3_ENDPOINT_URL}/media/'
+    MEDIA_ROOT = f'{AWS_S3_ENDPOINT_URL}/media'
 
 
 if DEBUG:
@@ -286,4 +286,3 @@ if POSTGRES_READY:
     }
 
 CSRF_TRUSTED_ORIGINS = ['http://*', 'https://*']
-print(CSRF_TRUSTED_ORIGINS)
