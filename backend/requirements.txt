@@ -1,4 +1,4 @@
-django >= 3.2.0
+django == 3.2.0
 djangorestframework
 django-dotenv
 django-cors-headers == 3.14.0
