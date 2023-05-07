@@ -46,7 +46,7 @@ const myCopyFunc = (text, icon) =>{
     preserveText.innerHTML = text
     icon.addEventListener('click', ()=>{
         navigator.clipboard.writeText(preserveText.value)
-        console.log('hi')
+        
     })
 
 }
