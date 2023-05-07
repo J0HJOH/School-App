@@ -24,9 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = str(os.environ.get('DEBUG')) == '1'
+print(DEBUG)
+
 
 ALLOWED_HOSTS = []
+if not DEBUG:
+    ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS')]
 
 
 # Application definition
@@ -39,6 +43,7 @@ INSTALLED_APPS = [
     "corsheaders",
     'rest_framework_simplejwt.token_blacklist',
     'django_rest_passwordreset',
+    'storages',
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -141,9 +146,9 @@ STATICFILES_DIRS = [
 ]
 
 
-MEDIA_URL = '/images/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -215,3 +220,39 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+
+if str(os.environ.get('AWS_READY')) == '1' and not DEBUG:
+    # AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
+    # print(AWS_ACCESS_KEY_ID)
+    # AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
+    # AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', '')
+    # AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    # AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+    AWS_DEFAULT_ACL = None
+
+    AWS_LOCATION = 'static'
+    STATICFILES_STORAGE ='storages.backends.s3boto3.S3StaticStorage'
+    DEFAULT_FILE_STORAGE = 'school_portal.storages.MediaStore'
+
+    LINODE_BUCKET = os.environ.get('LINODE_BUCKET')
+    LINODE_BUCKET_REGION = 'eu-central-1'
+    LINODE_BUCKET_ACCESS_KEY = os.environ.get('LINODE_BUCKET_ACCESS_KEY')
+    LINODE_BUCKET_SECRET_KEY = os.environ.get('LINODE_BUCKET_SECRET_KEY')
+
+    AWS_S3_ENDPOINT_URL = f'https://{LINODE_BUCKET_REGION}.linodeobjects.com'
+    AWS_ACCESS_KEY_ID = LINODE_BUCKET_ACCESS_KEY
+    AWS_SECRET_ACCESS_KEY = LINODE_BUCKET_SECRET_KEY
+    AWS_S3_REGION_NAME = LINODE_BUCKET_REGION
+    AWS_S3_USE_SSL = True
+    AWS_STORAGE_BUCKET_NAME = LINODE_BUCKET
+    
+    STATIC_URL= f'{AWS_S3_ENDPOINT_URL}/static/'
+    MEDIA_URL = f'{AWS_S3_ENDPOINT_URL}/media/'
+    MEDIA_ROOT = f'{AWS_S3_ENDPOINT_URL}/media/'
+
+
+if DEBUG:
+    STATIC_URL= 'static/'
+    MEDIA_URL = 'media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    # MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_MEDIA_LOCATION}/'

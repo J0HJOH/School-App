@@ -12,3 +12,5 @@ djangorestframework-simplejwt
 Pillow
 Markdown == 3.2.1
 django-rest-passwordreset
+boto3
+django-storages
