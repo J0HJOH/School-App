@@ -285,5 +285,5 @@ if POSTGRES_READY:
         }
     }
 
-CSRF_TRUSTED_ORIGINS = ['https://godocs.up.railway.app/', 'https://godocs', 'http://*', 'https://*']
+CSRF_TRUSTED_ORIGINS = ['http://*', 'https://*']
 print(CSRF_TRUSTED_ORIGINS)
