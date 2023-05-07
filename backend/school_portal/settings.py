@@ -285,4 +285,4 @@ if POSTGRES_READY:
         }
     }
 
-# CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS.copy()
+CSRF_TRUSTED_ORIGINS = ['https://godocs.up.railway.app/', 'https://godocs']
