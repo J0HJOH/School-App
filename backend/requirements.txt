@@ -14,3 +14,5 @@ Markdown == 3.2.1
 django-rest-passwordreset
 boto3
 django-storages
+whitenoise==6.2.0
+Brotli==1.0.9
