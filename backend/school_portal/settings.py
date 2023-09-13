@@ -29,13 +29,13 @@ DEBUG = str(os.environ.get('DEBUG')) == '1'
 
 
 ALLOWED_HOSTS = []
-if not DEBUG:
-    ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
+# if not DEBUG:
+#     ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
 
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+    ALLOWED_HOSTS = RENDER_EXTERNAL_HOSTNAME
 print(RENDER_EXTERNAL_HOSTNAME)
 # Application definition
 
